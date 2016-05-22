@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en-US">
+	<head>
+		<title th:text="'Comments for ' + ${EmplIDText} "/>
+		<style>
+    body {
+        font-family: "Helvetica Neue", Helvetica, Arial;
+        font-size: 14px;
+        line-height: 20px;
+        font-weight: 400;
+        color: #3b3b3b;
+        -webkit-font-smoothing: antialiased;
+        font-smoothing: antialiased;
+        background: #2b2b2b;
+    }
+    .wrapper {
+        margin: 0 auto;
+        padding: 40px;
+        max-width: 400px;
+    }
+    .table {
+        margin: 0 0 40px 0;
+        width: 100%;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+        display: table;
+    }
+    @media screen and (max-width: 400px) {
+        .table {
+            display: block;
+        }
+    }
+    .row {
+        display: table-row;
+        background: #f6f6f6;
+    }
+    .row:nth-of-type(odd) {
+        background: #e9e9e9;
+    }
+    .row.header {
+        font-weight: 900;
+        color: #ffffff;
+        background: #f95252;
+    }
+    @media screen and (max-width: 400px) {
+        .row {
+            padding: 8px 0;
+            display: block;
+        }
+    }
+    .cell {
+        padding: 6px 12px;
+        display: table-cell;
+    }
+    @media screen and (max-width: 400px) {
+        .cell {
+            padding: 2px 12px;
+            display: block;
+        }
+    }
+</style>
+	 </head>
+      <body>
+         <form action="#" th:action="@{/comments}" th:object="${commentFormData}" method="post">
+         <input type="hidden" id="EmplID" name="EmplID" th:value= "${EmplIDText}" />	
+         <div class="wrapper">
+         <div class="table">
+         
+         	<div class="row header">
+               <div class="cell" th:text= "'Counselor (' + ${Counselor} +')' ">       </div>
+               <div class="cell">              </div>
+               <div class="cell">              </div>
+               <div class="cell">              </div>
+            </div>
+         
+         
+         
+         
+            <div class="row header">
+               <div class="cell" th:text= "'Comments (' + ${EmplIDText} +')' ">       </div>
+               <div class="cell">        Date      </div>
+               <div class="cell">        User      </div>
+               <div class="cell">        Year      </div>
+            </div>
+		
+
+
+            <div class="row" th:each="comment : ${comments}">
+        		<div class="cell" th:text="${comment.comment}">Comment</div>
+       			<div class="cell" th:text="${comment.date}">Date</div>
+       			<div class="cell" th:text="${comment.user}">User</div>
+       			<div class="cell" th:text="${comment.year}">Year</div>
+      		</div>
+            <div class="row">
+               <div class="cell">      </div>
+               <div class="cell">      </div>
+               <div class="cell">      </div>
+               <div class="cell">      </div>
+            </div>
+            
+            <div class="row">
+               <div class="cell"><input type="text" th:field="*{comment}" placeholder="New Comment" /></div>
+               <div class="cell">
+               		  <select name="year" id="year">
+							    <option value="2016">2016</option>
+							    <option value="2017" selected="selected">2017</option>
+							    <option value="2018">2018</option>
+							    <option value="2019">2019</option>
+					  </select>
+               </div>
+               <div class="cell"><input type="submit" name="getComment" class="login login-submit" value="Add" /></div>
+            	<div class="cell">      </div>
+            </div>
+         </div>
+         </div>
+         </form>
+      </body>
+   </html>
+   
